@@ -12,8 +12,11 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import model.sjfModel;
@@ -23,11 +26,9 @@ import model.sjfModel;
  * @author proxc
  */
 public class Home20 extends javax.swing.JFrame {
-    
+
     ClientControl control;
     ArrayList<sjfModel> laplichSjf;
-
-
 
     private CardLayout cardLayout;
 
@@ -37,7 +38,7 @@ public class Home20 extends javax.swing.JFrame {
     public Home20() {
         initComponents();
         control = new ClientControl();
-        
+
         Home20.this.getRootPane().setBorder(new LineBorder(new Color(76, 41, 211)));
         lblTitle.setText(this.getTitle());
         cardLayout = (CardLayout) pnlRight.getLayout();
@@ -45,10 +46,10 @@ public class Home20 extends javax.swing.JFrame {
         if (OSUtils.getOSType() == OSUtils.OSType.MacOS) {
             pnlTop.remove(pnlTitle);
             pnlTop.remove(pnlRight);
-            
+
             pnlTop.add(pnlTitle, BorderLayout.EAST);
             pnlTop.add(pnlActions, BorderLayout.WEST);
-            
+
             pnlActions.remove(lblClose);
             pnlActions.remove(lblMaximize);
             pnlActions.remove(lblMinimize);
@@ -56,19 +57,19 @@ public class Home20 extends javax.swing.JFrame {
             pnlActions.add(lblClose);
             pnlActions.add(lblMaximize);
             pnlActions.add(lblMinimize);
-            
+
             pnlTitle.remove(lblTitle);
             pnlTitle.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 8));
-            pnlTitle.add(lblTitle);      
-            
-        }        
-           if (OSUtils.getOSType() == OSUtils.OSType.Windows) {
+            pnlTitle.add(lblTitle);
+
+        }
+        if (OSUtils.getOSType() == OSUtils.OSType.Windows) {
             pnlTop.remove(pnlTitle);
             pnlTop.remove(pnlRight);
-            
+
             pnlTop.add(pnlTitle, BorderLayout.WEST);
             pnlTop.add(pnlActions, BorderLayout.EAST);
-            
+
             pnlActions.remove(lblClose);
             pnlActions.remove(lblMaximize);
             pnlActions.remove(lblMinimize);
@@ -76,11 +77,11 @@ public class Home20 extends javax.swing.JFrame {
             pnlActions.add(lblMinimize);
             pnlActions.add(lblMaximize);
             pnlActions.add(lblClose);
-            
+
             pnlTitle.remove(lblTitle);
             pnlTitle.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 8));
-            pnlTitle.add(lblTitle);      
-            
+            pnlTitle.add(lblTitle);
+
         }
     }
 
@@ -492,6 +493,7 @@ public class Home20 extends javax.swing.JFrame {
                 "Process:", "Arrival Time:", "Burst Time:"
             }
         ));
+        jinputSJF.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jinputSJF.setOpaque(false);
         jinputSJF.setRequestFocusEnabled(false);
         jScrollPane3.setViewportView(jinputSJF);
@@ -502,17 +504,19 @@ public class Home20 extends javax.swing.JFrame {
             pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSJFLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(jLabel4)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jnumberSJF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addGap(85, 85, 85))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSJFLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addGroup(pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSendSJF, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+                    .addGroup(pnlSJFLayout.createSequentialGroup()
+                        .addGap(568, 568, 568)
+                        .addComponent(jSendSJF, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
                 .addGap(55, 55, 55))
         );
         pnlSJFLayout.setVerticalGroup(
@@ -520,15 +524,16 @@ public class Home20 extends javax.swing.JFrame {
             .addGroup(pnlSJFLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jnumberSJF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlSJFLayout.createSequentialGroup()
+                        .addGroup(pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jnumberSJF)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(90, 90, 90))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addComponent(jSendSJF)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addGap(249, 249, 249))
         );
 
         pnlRight.add(pnlSJF, "cSJF");
@@ -608,16 +613,20 @@ public class Home20 extends javax.swing.JFrame {
             .addGroup(pnlPriotityLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(pnlPriotityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPriotityLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane2))
                     .addGroup(pnlPriotityLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jnumberP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jnumberP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(71, 71, 71)
+                        .addComponent(jScrollPane4)
                         .addGap(34, 34, 34))
-                    .addComponent(jSendPriority, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPriotityLayout.createSequentialGroup()
+                        .addGap(582, 582, 582)
+                        .addComponent(jSendPriority, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(51, 51, 51))
         );
         pnlPriotityLayout.setVerticalGroup(
             pnlPriotityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -700,17 +709,19 @@ public class Home20 extends javax.swing.JFrame {
             pnlFCFSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFCFSLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(jLabel6)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jnumberFCFS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jnumberFCFS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane6)
+                .addGap(110, 110, 110))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFCFSLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addGroup(pnlFCFSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSendFCFS, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFCFSLayout.createSequentialGroup()
+                        .addGap(568, 568, 568)
+                        .addComponent(jSendFCFS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
         pnlFCFSLayout.setVerticalGroup(
@@ -794,17 +805,19 @@ public class Home20 extends javax.swing.JFrame {
             pnlRRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRRLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
-                .addComponent(jLabel8)
+                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jnumberRR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jnumberRR, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane8)
+                .addGap(110, 110, 110))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRRLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addGap(64, 64, 64)
                 .addGroup(pnlRRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSendRR, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlRRLayout.createSequentialGroup()
+                        .addGap(568, 568, 568)
+                        .addComponent(jSendRR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
         pnlRRLayout.setVerticalGroup(
@@ -875,7 +888,6 @@ public class Home20 extends javax.swing.JFrame {
         ind_fonts.setOpaque(true);
         ind_icons.setOpaque(false);
 
-
         cardLayout.show(pnlRight, "cSJF");
 
     }//GEN-LAST:event_btn_fontsMousePressed
@@ -893,7 +905,7 @@ public class Home20 extends javax.swing.JFrame {
         ind_data.setOpaque(false);
         ind_fonts.setOpaque(false);
         ind_icons.setOpaque(false);
-        
+
         cardLayout.show(pnlRight, "cRR");
     }//GEN-LAST:event_btn_btnsMousePressed
 
@@ -934,16 +946,18 @@ public class Home20 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_pnlTopMouseClicked
 
-    
+
     private void jSendPriorityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendPriorityActionPerformed
-         String send = "2";
+        if (validCheckP(jTablePriority)) {
+            if (validCheckP1(jTablePriority)) {
+        String send = "2";
         String[] words = jnumberSJF.getSelectedItem().toString().split(";");
-        send += ";"+jnumberP.getSelectedItem().toString();
+        send += ";" + jnumberP.getSelectedItem().toString();
         int num = Integer.valueOf(jnumberP.getSelectedItem().toString());
-        for(int i = 0; i < num; i++){
-            send += ";"+String.valueOf(jTablePriority.getModel().getValueAt(i, 0));
-            send += ";"+String.valueOf(jTablePriority.getModel().getValueAt(i, 1));
-            send += ";"+String.valueOf(jTablePriority.getModel().getValueAt(i, 2));
+        for (int i = 0; i < num; i++) {
+            send += ";" + String.valueOf(jTablePriority.getModel().getValueAt(i, 0));
+            send += ";" + String.valueOf(jTablePriority.getModel().getValueAt(i, 1));
+            send += ";" + String.valueOf(jTablePriority.getModel().getValueAt(i, 2));
         }
         //        laplichSjf.get(0).setNum(Integer.valueOf(tfTenTim.getText()));
         //        laplichSjf.get(0).setId(Integer.valueOf());
@@ -964,6 +978,12 @@ public class Home20 extends javax.swing.JFrame {
             updateTablePriority(tmp);
         }
         control.close();
+            }else{
+                JOptionPane.showMessageDialog(null, "Value is not valid");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Field is empty");
+        }
     }//GEN-LAST:event_jSendPriorityActionPerformed
 
     private void tblPriorityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPriorityMouseClicked
@@ -972,37 +992,49 @@ public class Home20 extends javax.swing.JFrame {
 
     private void jSendSJFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendSJFActionPerformed
         // TODO add your handling code here:
-        String send = "1";
-        String[] words = jnumberSJF.getSelectedItem().toString().split(";");
-        send += ";"+jnumberSJF.getSelectedItem().toString();
-        int num = Integer.valueOf(jnumberSJF.getSelectedItem().toString());
-        for(int i = 0; i < num; i++){
-            send += ";"+String.valueOf(jinputSJF.getModel().getValueAt(i, 0));
-            send += ";"+String.valueOf(jinputSJF.getModel().getValueAt(i, 1));
-            send += ";"+String.valueOf(jinputSJF.getModel().getValueAt(i, 2));
-        }
         
+        if (validCheckSJF(jinputSJF)) {
+            if (validCheckSJF1(jinputSJF)) {
+                String send = "1";
+                String[] words = jnumberSJF.getSelectedItem().toString().split(";");
+                send += ";" + jnumberSJF.getSelectedItem().toString();
+                int num = Integer.valueOf(jnumberSJF.getSelectedItem().toString());
+                for (int i = 0; i < num; i++) {
+                    send += ";" + String.valueOf(jinputSJF.getModel().getValueAt(i, 0));
+                    send += ";" + String.valueOf(jinputSJF.getModel().getValueAt(i, 1));
+                    send += ";" + String.valueOf(jinputSJF.getModel().getValueAt(i, 2));
+                }
 
+                //        laplichSjf.get(0).setNum(Integer.valueOf(tfTenTim.getText()));
+                //        laplichSjf.get(0).setId(Integer.valueOf());
+                //        laplichSjf.get(0).setArrivalTime(Integer.valueOf());
+                //        laplichSjf.get(0).setBurstTime(Integer.valueOf());
+                //        laplichSjf.get(1).setNum(Integer.valueOf(tfTenTim.getText()));
+                //        laplichSjf.get(1).setId(Integer.valueOf(id2.getText()));
+                //        laplichSjf.get(1).setArrivalTime(Integer.valueOf(ArrivalTime2.getText()));
+                //        laplichSjf.get(1).setBurstTime(Integer.valueOf(BurstTime2.getText()));
+                //        Object s = null;
+                control.open();
+                control.sendData(send);
+                Object o = control.receiveData();
+                if (o instanceof String) {
+                    //            laplichSjf = (ArrayList<sjfModel>) o;
+                    String tmp = String.valueOf(o);
+                    updateTableSJF(tmp);
+                }
+                control.close();
 
-        //        laplichSjf.get(0).setNum(Integer.valueOf(tfTenTim.getText()));
-        //        laplichSjf.get(0).setId(Integer.valueOf());
-        //        laplichSjf.get(0).setArrivalTime(Integer.valueOf());
-        //        laplichSjf.get(0).setBurstTime(Integer.valueOf());
-        //        laplichSjf.get(1).setNum(Integer.valueOf(tfTenTim.getText()));
-        //        laplichSjf.get(1).setId(Integer.valueOf(id2.getText()));
-        //        laplichSjf.get(1).setArrivalTime(Integer.valueOf(ArrivalTime2.getText()));
-        //        laplichSjf.get(1).setBurstTime(Integer.valueOf(BurstTime2.getText()));
-        //        Object s = null;
+            } else {
+                JOptionPane.showMessageDialog(null, "Value is not valid");
 
-        control.open();
-        control.sendData(send);
-        Object o = control.receiveData();
-        if (o instanceof String) {
-            //            laplichSjf = (ArrayList<sjfModel>) o;
-            String tmp = String.valueOf(o);
-            updateTableSJF(tmp);
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Field is empty");
+
         }
-        control.close();
+
     }//GEN-LAST:event_jSendSJFActionPerformed
 
     private void tblSJFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSJFMouseClicked
@@ -1016,22 +1048,25 @@ public class Home20 extends javax.swing.JFrame {
 
     private void jnumberSJFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberSJFItemStateChanged
         DefaultTableModel model = (DefaultTableModel) jinputSJF.getModel();
-        int rows2 = 2;int rows3 = 3;int rows4 = 4;int rows5 = 5;
-        if(jnumberSJF.getSelectedItem().toString().equals("2")){
+        int rows2 = 2;
+        int rows3 = 3;
+        int rows4 = 4;
+        int rows5 = 5;
+        if (jnumberSJF.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
-            
+
         }
-        if(jnumberSJF.getSelectedItem().toString().equals("3")){
+        if (jnumberSJF.getSelectedItem().toString().equals("3")) {
             model.setRowCount(rows3);
-            
+
         }
-        if(jnumberSJF.getSelectedItem().toString().equals("4")){
+        if (jnumberSJF.getSelectedItem().toString().equals("4")) {
             model.setRowCount(rows4);
-            
+
         }
-        if(jnumberSJF.getSelectedItem().toString().equals("5")){
+        if (jnumberSJF.getSelectedItem().toString().equals("5")) {
             model.setRowCount(rows5);
-            
+
         }
     }//GEN-LAST:event_jnumberSJFItemStateChanged
 
@@ -1042,16 +1077,17 @@ public class Home20 extends javax.swing.JFrame {
     private void jSendFCFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendFCFSActionPerformed
         // TODO add your handling code here:
         String send = "3";
-        String[] words = jnumberSJF.getSelectedItem().toString().split(";");
-        send += ";"+jnumberFCFS.getSelectedItem().toString();
-        int num = Integer.valueOf(jnumberFCFS.getSelectedItem().toString());
-        for(int i = 0; i < num; i++){
-            send += ";"+String.valueOf(jinputFCFS.getModel().getValueAt(i, 0));
-            send += ";"+String.valueOf(jinputFCFS.getModel().getValueAt(i, 1));
-            
-        }
+        if (validCheckFCFS(jinputFCFS)) {
+            if (validCheckFCFS1(jinputFCFS)) {
         
+        String[] words = jnumberSJF.getSelectedItem().toString().split(";");
+        send += ";" + jnumberFCFS.getSelectedItem().toString();
+        int num = Integer.valueOf(jnumberFCFS.getSelectedItem().toString());
+        for (int i = 0; i < num; i++) {
+            send += ";" + String.valueOf(jinputFCFS.getModel().getValueAt(i, 0));
+            send += ";" + String.valueOf(jinputFCFS.getModel().getValueAt(i, 1));
 
+        }
 
         //        laplichSjf.get(0).setNum(Integer.valueOf(tfTenTim.getText()));
         //        laplichSjf.get(0).setId(Integer.valueOf());
@@ -1062,7 +1098,6 @@ public class Home20 extends javax.swing.JFrame {
         //        laplichSjf.get(1).setArrivalTime(Integer.valueOf(ArrivalTime2.getText()));
         //        laplichSjf.get(1).setBurstTime(Integer.valueOf(BurstTime2.getText()));
         //        Object s = null;
-
         control.open();
         control.sendData(send);
         Object o = control.receiveData();
@@ -1072,49 +1107,66 @@ public class Home20 extends javax.swing.JFrame {
             updateTableFCFS(tmp);
         }
         control.close();
+        } else {
+                JOptionPane.showMessageDialog(null, "Value is not valid");
+                System.out.print(send);
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Field is empty");
+
+        }
     }//GEN-LAST:event_jSendFCFSActionPerformed
 
     private void jnumberFCFSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberFCFSItemStateChanged
         // TODO add your handling code here:
-          DefaultTableModel model = (DefaultTableModel) jinputFCFS.getModel();
-        int rows2 = 2;int rows3 = 3;int rows4 = 4;int rows5 = 5;
-        if(jnumberFCFS.getSelectedItem().toString().equals("2")){
+        DefaultTableModel model = (DefaultTableModel) jinputFCFS.getModel();
+        int rows2 = 2;
+        int rows3 = 3;
+        int rows4 = 4;
+        int rows5 = 5;
+        if (jnumberFCFS.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
-            
+
         }
-        if(jnumberFCFS.getSelectedItem().toString().equals("3")){
+        if (jnumberFCFS.getSelectedItem().toString().equals("3")) {
             model.setRowCount(rows3);
-            
+
         }
-        if(jnumberFCFS.getSelectedItem().toString().equals("4")){
-             model.setRowCount(rows4);
-            
+        if (jnumberFCFS.getSelectedItem().toString().equals("4")) {
+            model.setRowCount(rows4);
+
         }
-        if(jnumberFCFS.getSelectedItem().toString().equals("5")){
+        if (jnumberFCFS.getSelectedItem().toString().equals("5")) {
             model.setRowCount(rows5);
-            
+
         }
     }//GEN-LAST:event_jnumberFCFSItemStateChanged
 
     private void jnumberPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberPItemStateChanged
         // TODO add your handling code here:
-         DefaultTableModel model = (DefaultTableModel) jTablePriority.getModel();
-        int rows2 = 2;int rows3 = 3;int rows4 = 4;int rows5 = 5;
-        if(jnumberP.getSelectedItem().toString().equals("2")){
+        DefaultTableModel model = (DefaultTableModel) jTablePriority.getModel();
+        int rows2 = 2;
+        int rows3 = 3;
+        int rows4 = 4;
+        int rows5 = 5;
+        if (jnumberP.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
-            
+
         }
-        if(jnumberP.getSelectedItem().toString().equals("3")){
+        if (jnumberP.getSelectedItem().toString().equals("3")) {
             model.setRowCount(rows3);
-            
+
         }
-        if(jnumberP.getSelectedItem().toString().equals("4")){
-             model.setRowCount(rows4);
-            
+        if (jnumberP.getSelectedItem().toString().equals("4")) {
+            model.setRowCount(rows4);
+
         }
-        if(jnumberP.getSelectedItem().toString().equals("5")){
+        if (jnumberP.getSelectedItem().toString().equals("5")) {
             model.setRowCount(rows5);
-            
+
         }
     }//GEN-LAST:event_jnumberPItemStateChanged
 
@@ -1124,17 +1176,17 @@ public class Home20 extends javax.swing.JFrame {
 
     private void jSendRRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSendRRActionPerformed
         // TODO add your handling code here:
+         if (validCheckRR(jinputRR)) {
+            if (validCheckRR1(jinputRR)) {
         String send = "4";
 //        String[] words = jnumberSJF.getSelectedItem().toString().split(";");
-        send += ";"+jnumberRR.getSelectedItem().toString();
+        send += ";" + jnumberRR.getSelectedItem().toString();
         int num = Integer.valueOf(jnumberRR.getSelectedItem().toString());
-        for(int i = 0; i < num; i++){
-            send += ";"+String.valueOf(jinputRR.getModel().getValueAt(i, 0));
-            send += ";"+String.valueOf(jinputRR.getModel().getValueAt(i, 1));
-            
-        }
-        
+        for (int i = 0; i < num; i++) {
+            send += ";" + String.valueOf(jinputRR.getModel().getValueAt(i, 0));
+            send += ";" + String.valueOf(jinputRR.getModel().getValueAt(i, 1));
 
+        }
 
         //        laplichSjf.get(0).setNum(Integer.valueOf(tfTenTim.getText()));
         //        laplichSjf.get(0).setId(Integer.valueOf());
@@ -1145,7 +1197,6 @@ public class Home20 extends javax.swing.JFrame {
         //        laplichSjf.get(1).setArrivalTime(Integer.valueOf(ArrivalTime2.getText()));
         //        laplichSjf.get(1).setBurstTime(Integer.valueOf(BurstTime2.getText()));
         //        Object s = null;
-
         control.open();
         control.sendData(send);
         Object o = control.receiveData();
@@ -1155,30 +1206,43 @@ public class Home20 extends javax.swing.JFrame {
             updateTableRR(tmp);
         }
         control.close();
-        
+        } else {
+                JOptionPane.showMessageDialog(null, "Value is not valid");
+
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(null, "Field is empty");
+
+        }
+
     }//GEN-LAST:event_jSendRRActionPerformed
 
     private void jnumberRRItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberRRItemStateChanged
         // TODO add your handling code here:
-         DefaultTableModel model = (DefaultTableModel) jinputRR.getModel();
-        int rows2 = 2;int rows3 = 3;int rows4 = 4;int rows5 = 5;
-        if(jnumberRR.getSelectedItem().toString().equals("2")){
+        DefaultTableModel model = (DefaultTableModel) jinputRR.getModel();
+        int rows2 = 2;
+        int rows3 = 3;
+        int rows4 = 4;
+        int rows5 = 5;
+        if (jnumberRR.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
-            
+
         }
-        if(jnumberRR.getSelectedItem().toString().equals("3")){
+        if (jnumberRR.getSelectedItem().toString().equals("3")) {
             model.setRowCount(rows3);
-            
+
         }
-        if(jnumberRR.getSelectedItem().toString().equals("4")){
-             model.setRowCount(rows4);
-            
+        if (jnumberRR.getSelectedItem().toString().equals("4")) {
+            model.setRowCount(rows4);
+
         }
-        if(jnumberRR.getSelectedItem().toString().equals("5")){
+        if (jnumberRR.getSelectedItem().toString().equals("5")) {
             model.setRowCount(rows5);
-            
+
         }
-    
+
     }//GEN-LAST:event_jnumberRRItemStateChanged
 
     private void btn_iconsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_iconsMousePressed
@@ -1212,7 +1276,7 @@ public class Home20 extends javax.swing.JFrame {
         ind_fonts.setOpaque(false);
         ind_icons.setOpaque(false);
 
-       
+
     }//GEN-LAST:event_btn_dataMousePressed
 
     // set and reset color
@@ -1259,54 +1323,185 @@ public class Home20 extends javax.swing.JFrame {
             }
         });
     }
+
     private void updateTableSJF(String a) {
         String[] words = a.split(";");
         int num = Integer.valueOf(words[1]);
         DefaultTableModel model = (DefaultTableModel) tblSJF.getModel();
         model.getDataVector().removeAllElements();
         int count = 2;
-        
-        for(int i = 0; i < num; i++){
-            model.addRow(new Object[]{words[count], words[count+1],words[count+2],words[count+3],words[count+4]});
-            count+=5;
+
+        for (int i = 0; i < num; i++) {
+            model.addRow(new Object[]{words[count], words[count + 1], words[count + 2], words[count + 3], words[count + 4]});
+            count += 5;
         }
     }
+
     private void updateTablePriority(String a) {
         String[] words = a.split(";");
         int num = Integer.valueOf(words[1]);
         DefaultTableModel model = (DefaultTableModel) tblPriority.getModel();
         model.getDataVector().removeAllElements();
         int count = 2;
-        
-        for(int i = 0; i < num; i++){
-            model.addRow(new Object[]{words[count], words[count+1],words[count+2],words[count+3],words[count+4]});
-            count+=5;
+
+        for (int i = 0; i < num; i++) {
+            model.addRow(new Object[]{words[count], words[count + 1], words[count + 2], words[count + 3], words[count + 4]});
+            count += 5;
         }
     }
+
     private void updateTableFCFS(String a) {
         String[] words = a.split(";");
         int num = Integer.valueOf(words[1]);
         DefaultTableModel model = (DefaultTableModel) tblFCFS.getModel();
         model.getDataVector().removeAllElements();
         int count = 2;
-        
-        for(int i = 0; i < num; i++){
-            model.addRow(new Object[]{words[count], words[count+1],words[count+2],words[count+3]});
-            count+=4;
+
+        for (int i = 0; i < num; i++) {
+            model.addRow(new Object[]{words[count], words[count + 1], words[count + 2], words[count + 3]});
+            count += 4;
         }
     }
-     private void updateTableRR(String a) {
+
+    private void updateTableRR(String a) {
         String[] words = a.split(";");
         int num = Integer.valueOf(words[1]);
         DefaultTableModel model = (DefaultTableModel) tblRR.getModel();
         model.getDataVector().removeAllElements();
         int count = 2;
-        
-        for(int i = 0; i < num; i++){
-            model.addRow(new Object[]{words[count], words[count+1],words[count+2],words[count+3]});
-            count+=4;
+
+        for (int i = 0; i < num; i++) {
+            model.addRow(new Object[]{words[count], words[count + 1], words[count + 2], words[count + 3]});
+            count += 4;
         }
     }
+
+    public boolean validCheckFCFS(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(value.trim().length() == 0) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+    
+     public boolean validCheckFCFS1(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+         Pattern pattern = Pattern.compile(".*[^0-9].*");
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(pattern.matcher(value).matches()) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+     public boolean validCheckRR(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(value.trim().length() == 0) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+    
+     public boolean validCheckRR1(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+         Pattern pattern = Pattern.compile(".*[^0-9].*");
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(pattern.matcher(value).matches()) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+     public boolean validCheckP(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(value.trim().length() == 0) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+    
+     public boolean validCheckP1(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+         Pattern pattern = Pattern.compile(".*[^0-9].*");
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(pattern.matcher(value).matches()) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+     public boolean validCheckSJF(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(value.trim().length() == 0) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+    
+     public boolean validCheckSJF1(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+         Pattern pattern = Pattern.compile(".*[^0-9].*");
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                String value = table.getValueAt(i,j).toString();
+            if(pattern.matcher(value).matches()) {
+               return false;
+            }
+         }
+      }
+      return true;
+   }
+    
+    
+
+   
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_btns;
