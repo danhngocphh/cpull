@@ -40,10 +40,10 @@ public class ServerControl {
     public static int buffsize = 10000;
 
     public ServerControl() {
-        getCon("QLBH", "sa", "1234$");
-        if (con != null) {
-            System.out.println("OK");
-        }
+//        getCon("QLBH", "sa", "1234$");
+//        if (con != null) {
+//            System.out.println("OK");
+//        }
         open(serverPort);
         setstart();
         while (true) {
@@ -183,18 +183,18 @@ public class ServerControl {
         return sjfSend;
     }
     
-    public void updateMatHang(MatHang mh){
-        String sql = "UPDATE tblMatHang SET gia = ? WHERE id = ?";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setFloat(1, mh.getGia());
-            ps.setInt(2, mh.getId());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+//    public void updateMatHang(MatHang mh){
+//        String sql = "UPDATE tblMatHang SET gia = ? WHERE id = ?";
+//        try {
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setFloat(1, mh.getGia());
+//            ps.setInt(2, mh.getId());
+//            ps.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ServerControl.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
     public void setstart(){
         for(int i = 0; i < 10000;i++){
             ktKey[i] = 0;
