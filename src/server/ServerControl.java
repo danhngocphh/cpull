@@ -91,7 +91,9 @@ public class ServerControl {
 
     public void sendData(String o) {
         try {
-            o = aes.encrypt(o, keyClient[dpreceive.getPort()]);      //Mã Hóa Dữ Liệu
+            o = aes.encrypt(o, keyClient[dpreceive.getPort()]);  
+            //Mã Hóa Dữ Liệu
+            System.out.println("sendData: "+o);
 
             byte[] sendData = o.getBytes();
             dpsend = new DatagramPacket(sendData, sendData.length, dpreceive.getAddress(), dpreceive.getPort());
@@ -113,7 +115,7 @@ public class ServerControl {
             if(ktKey[dpreceive.getPort()] == 0) {
 
                             keyClient[dpreceive.getPort()] = rsa.Decrpytion(o);
-                            System.out.println(o);
+                            System.out.println("keyClient: "+o);
                             o = "Kết nối thành công";
                             dpsend = new DatagramPacket(o.getBytes(),o .getBytes().length, 
                                             dpreceive.getAddress(), dpreceive.getPort());
@@ -123,6 +125,7 @@ public class ServerControl {
                 
             }else{
                 o = aes.decrypt(o,keyClient[dpreceive.getPort()]);
+                System.out.println("receiveData: "+o);
             }
             
                         

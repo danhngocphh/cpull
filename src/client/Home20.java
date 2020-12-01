@@ -38,6 +38,10 @@ public class Home20 extends javax.swing.JFrame {
     public Home20() {
         initComponents();
         control = new ClientControl();
+        setTable(jTablePriority);
+        setTable(jinputFCFS);
+        setTable(jinputRR);
+        setTable(jinputSJF);
 
         Home20.this.getRootPane().setBorder(new LineBorder(new Color(76, 41, 211)));
         lblTitle.setText(this.getTitle());
@@ -527,7 +531,7 @@ public class Home20 extends javax.swing.JFrame {
                     .addGroup(pnlSJFLayout.createSequentialGroup()
                         .addGroup(pnlSJFLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jnumberSJF)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))
                         .addGap(90, 90, 90))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jSendSJF)
@@ -1048,10 +1052,15 @@ public class Home20 extends javax.swing.JFrame {
 
     private void jnumberSJFItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberSJFItemStateChanged
         DefaultTableModel model = (DefaultTableModel) jinputSJF.getModel();
+        int rows1 = 1;
         int rows2 = 2;
         int rows3 = 3;
         int rows4 = 4;
         int rows5 = 5;
+        if (jnumberSJF.getSelectedItem().toString().equals("1")) {
+            model.setRowCount(rows1);
+
+        }
         if (jnumberSJF.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
 
@@ -1123,10 +1132,15 @@ public class Home20 extends javax.swing.JFrame {
     private void jnumberFCFSItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberFCFSItemStateChanged
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jinputFCFS.getModel();
+        int rows1 = 1;
         int rows2 = 2;
         int rows3 = 3;
         int rows4 = 4;
         int rows5 = 5;
+        if (jnumberFCFS.getSelectedItem().toString().equals("1")) {
+            model.setRowCount(rows1);
+
+        }
         if (jnumberFCFS.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
 
@@ -1148,10 +1162,15 @@ public class Home20 extends javax.swing.JFrame {
     private void jnumberPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberPItemStateChanged
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jTablePriority.getModel();
+        int rows1 = 1;
         int rows2 = 2;
         int rows3 = 3;
         int rows4 = 4;
         int rows5 = 5;
+        if (jnumberP.getSelectedItem().toString().equals("1")) {
+            model.setRowCount(rows1);
+
+        }
         if (jnumberP.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
 
@@ -1222,10 +1241,15 @@ public class Home20 extends javax.swing.JFrame {
     private void jnumberRRItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jnumberRRItemStateChanged
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) jinputRR.getModel();
+        int rows1 = 1;
         int rows2 = 2;
         int rows3 = 3;
         int rows4 = 4;
         int rows5 = 5;
+        if (jnumberRR.getSelectedItem().toString().equals("1")) {
+            model.setRowCount(rows1);
+
+        }
         if (jnumberRR.getSelectedItem().toString().equals("2")) {
             model.setRowCount(rows2);
 
@@ -1495,6 +1519,19 @@ public class Home20 extends javax.swing.JFrame {
          }
       }
       return true;
+   }
+     
+      public void setTable(JTable table) {
+        if (table.getCellEditor() != null) {
+            table.getCellEditor().stopCellEditing();
+        }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+               table.setValueAt("", i, j);;
+
+         }
+      }
+      
    }
     
     

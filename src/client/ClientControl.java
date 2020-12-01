@@ -38,6 +38,7 @@ public class ClientControl {
 
 
                 String key = rsa.Encrpytion(keyClient);
+                System.out.println("key: "+key);
                 byte[] data = key.getBytes();
                 InetAddress IPAddress = InetAddress.getByName(serverHost);
                 dpsend = new DatagramPacket(data, data.length, IPAddress, serverPort);
@@ -67,6 +68,7 @@ public class ClientControl {
     public void sendData(String o) {
         try {
             o = aes.encrypt(o, keyClient); 
+            System.out.println("sendData: "+o);
             byte[] data;
             data = o.getBytes();
             InetAddress IPAddress = InetAddress.getByName(serverHost);
@@ -86,6 +88,8 @@ public class ClientControl {
                         o = new String(dpreceive.getData(), 0, dpreceive.getLength());
                         
                         o = aes.decrypt(o, keyClient);
+                        System.out.println("receiveData: "+o);
+           
             
 
         } catch (Exception e) {

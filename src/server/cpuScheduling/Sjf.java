@@ -84,6 +84,7 @@ public class Sjf {
             send = send + ";" +String.valueOf(mat[i][5]);
 //             mat[i][0], mat[i][1], mat[i][2], mat[i][4], mat[i][5]); 
         } 
+        System.out.print(send);
         return send;
     } 
    public String input()
